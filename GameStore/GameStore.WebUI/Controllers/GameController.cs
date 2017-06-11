@@ -18,9 +18,7 @@ namespace GameStore.WebUI.Controllers
 
 		public ViewResult List()
 		{
-			var game = repository.Games;
-
-			return View(game.First());
+			return View(repository.Games);
 		}
     }
 }
