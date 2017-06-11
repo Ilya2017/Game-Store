@@ -10,6 +10,7 @@ namespace GameStore.WebUI.Controllers
     public class GameController : Controller
     {
 		IGameRepository repository;
+
 		public GameController(IGameRepository repo)
 		{
 			repository = repo;

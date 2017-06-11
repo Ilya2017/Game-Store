@@ -2,6 +2,7 @@
 using GameStore.WebUI.Controllers;
 using GameStore.WebUI.Infrastructure;
 using Microsoft.Practices.Unity;
+using Microsoft.Practices.Unity.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,10 +19,14 @@ namespace GameStore.WebUI
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
+			var container = new UnityContainer().LoadConfiguration();
+			DependencyResolver.SetResolver(new UnityDependencyResolver(container));
+			/*
 			IUnityContainer container = new UnityContainer();
 			container.RegisterType<GameController>();
 			container.RegisterType<IGameRepository, LocalRepository>();
 			DependencyResolver.SetResolver(new DemoUnityDependencyResolver(container));
+			*/
 		}
     }
 }

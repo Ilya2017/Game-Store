@@ -7,11 +7,11 @@ using System.Web.Mvc;
 
 namespace GameStore.WebUI.Infrastructure
 {
-	public class DemoUnityDependencyResolver : IDependencyResolver
+	public class UnityDependencyResolver : IDependencyResolver
 	{
 		private IUnityContainer _unityContainer;
 
-		public DemoUnityDependencyResolver(IUnityContainer unityContainer)
+		public UnityDependencyResolver(IUnityContainer unityContainer)
 		{
 			_unityContainer = unityContainer;
 		}
