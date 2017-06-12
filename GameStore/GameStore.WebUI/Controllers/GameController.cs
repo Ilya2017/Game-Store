@@ -1,4 +1,5 @@
 ﻿using GameStore.Domain.Abstract;
+using GameStore.WebUI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace GameStore.WebUI.Controllers
     public class GameController : Controller
     {
 		IGameRepository repository;
-		public int pageSize = 4;
+		public int pageSize = 3;
 
 		public GameController(IGameRepository repo)
 		{
@@ -19,11 +20,21 @@ namespace GameStore.WebUI.Controllers
 
 		public ViewResult List(int page=1)
 		{
-			return View(repository.Games
-				.OrderBy(game=>game.GameId)
-				.Skip((page-1)*pageSize)
-				.Take(pageSize)
-				);
+			GamesListViewModel model = new GamesListViewModel
+			{
+				Games = repository.Games
+				.OrderBy(game => game.GameId)
+				.Skip((page - 1) * pageSize)
+				.Take(pageSize),
+
+				PagingInfo = new PagingInfo
+				{
+					CurrentPage = page,
+					ItemsPerPage = pageSize,
+					TotalItems = repository.Games.Count()
+				}
+			};
+			return View(model);
 		}
     }
 }
